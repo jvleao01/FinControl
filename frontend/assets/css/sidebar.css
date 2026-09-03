@@ -1,0 +1,129 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #1f0719;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex !important;
+    flex-direction: row !important;
+    min-height: 100dvh;
+    min-height: 100svh;
+    overflow-x: hidden;
+}
+
+body > .sidebar {
+    flex: 0 0 240px !important;
+    width: 240px !important;
+    max-width: 240px !important;
+    min-height: 100dvh !important;
+    min-height: 100svh !important;
+    background: linear-gradient(180deg, #0d1726 0%, #090d15 100%) !important;
+    border-right: 1px solid rgba(6, 33, 68, 0.16) !important;
+    padding: 20px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    box-shadow: 14px 0 40px rgba(1, 5, 12, 0.24) !important;
+    box-sizing: border-box !important;
+}
+
+body > .sidebar .logo h2 {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body > .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+body > .sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #9eacbe;
+    padding: 10px 12px;
+    border-radius: 12px;
+    transition: all 180ms ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+body > .sidebar nav a:hover {
+    background: rgba(79, 156, 255, 0.08);
+    color: #fff;
+}
+
+body > .sidebar nav a.active {
+    background: linear-gradient(90deg, rgba(79, 156, 255, 0.22), rgba(79, 156, 255, 0.08));
+    color: #ced1eb7a;
+    box-shadow: inset 3px 0 0 #046cf3, inset 0 0 0 1px rgba(51, 122, 221, 0.12);
+}
+
+body > .sidebar nav p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 12px;
+    transition: all 180ms ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+body > .sidebar nav p + a {
+    margin-top: 4px;
+}
+
+body > .content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    min-height: 100dvh !important;
+    min-height: 100svh !important;
+}
+
+@media (max-width: 900px) {
+    body {
+        flex-direction: column !important;
+        min-height: auto;
+    }
+
+    body > .sidebar {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: auto !important;
+        flex-basis: auto !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.16) !important;
+        padding: 16px !important;
+    }
+
+    body > .content {
+        min-height: auto !important;
+    }
+
+    body > .sidebar nav {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+
+    body > .sidebar nav a {
+        flex: 1 1 140px !important;
+        justify-content: center !important;
+    }
+}

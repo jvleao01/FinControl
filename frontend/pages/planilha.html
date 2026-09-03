@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-title" content="FinControl" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FinControl" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Planilha Financeira</title>
+
+    <link rel="apple-touch-icon" href="../assets/icon-192.png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/planilha.css">
+    <link rel="stylesheet" href="../assets/css/modal.css">
+</head>
+<body>
+    <div id="modalLancamento" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Lançamento</h2>
+                <button class="close" type="button">Fechar</button>
+            </div>
+
+            <div class="modal-body">
+                <label>Usuário</label>
+                <select id="usuario">
+                    <option value="João">João</option>
+                    <option value="Giovanna">Giovanna</option>
+                </select>
+                <label>Tipo</label>
+                <select id="tipo">
+                    <option value="receita">Receita</option>
+                    <option value="despesa" selected>Despesa</option>
+                </select>
+
+                <div id="categoriaContainer">
+                    <label>Categoria</label>
+                    <select id="categoria"></select>
+                </div>
+
+                <label>Valor (R$)</label>
+                <input id="valor" type="number" step="0.01">
+
+                <label>Descrição</label>
+                <input id="descricao" type="text">
+
+                <label>Data</label>
+                <input id="data" type="date">
+
+                <button id="salvarLancamento" class="btn-save" type="button">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>FinControl</h2>
+        </div>
+
+        <nav>
+            <a href="../index.html">Dashboard</a>
+            <p>Usuários</p>
+            <a href="Joao.html">João</a>
+            <a href="Giovanna.html">Giovanna</a>
+            <p>Lançamentos</p>
+            <a href="#" class="active">Planilha</a>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">FinControl</p>
+                <h1>Planilha Financeira</h1>
+            </div>
+
+            <button id="openModal" class="btn-primary">
+                Novo Lançamento
+            </button>
+        </header>
+
+        <section class="filters-panel">
+            <div class="filters">
+                <select id="filtroMes">
+                    <option value="">Todos os Meses</option>
+                </select>
+
+                <select id="filtroAno">
+                    <option value="">Todos os Anos</option>
+                </select>
+
+                <select id="filtroTipo">
+                    <option value="">Todos</option>
+                    <option value="receita">Receitas</option>
+                    <option value="despesa">Despesas</option>
+                </select>
+                <select id="filtroUsuario">
+                    <option value="">Todos os Usuários</option>
+                    <option value="João">João</option>
+                    <option value="Giovanna">Giovanna</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="resumo">
+            <div class="mini-card">
+                <p class="card-label">Receitas</p>
+                <h3 id="totalReceitas">R$ 0,00</h3>
+            </div>
+
+            <div class="mini-card">
+                <p class="card-label">Despesas</p>
+                <h3 id="totalDespesas">R$ 0,00</h3>
+            </div>
+
+            <div class="mini-card mini-card--accent">
+                <p class="card-label">Saldo</p>
+                <h3 id="saldoAtual">R$ 0,00</h3>
+            </div>
+        </section>
+
+        <section class="table-card">
+            <div class="table-card__header">
+                <div>
+                    <p class="eyebrow">Movimentações</p>
+                    <h2>Últimos lançamentos</h2>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Usuário</th>
+                            <th>Tipo</th>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaLancamentos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/modal.js"></script>
+    <script src="../assets/js/planilha.js"></script>
+</body>
+</html>
