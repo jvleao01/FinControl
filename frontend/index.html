@@ -65,17 +65,34 @@
             </article>
         </section>
 
-        <section class="chart-card" aria-labelledby="chart-title">
-            <div class="chart-card__header">
-                <div>
-                    <p class="eyebrow">Visão geral</p>
-                    <h3 id="chart-title">Distribuição das Despesas</h3>
+        <section class="charts-row">
+            <div class="chart-card" aria-labelledby="chart-title">
+                <div class="chart-card__header">
+                    <div>
+                        <p class="eyebrow">Visão geral</p>
+                        <h3 id="chart-title">Distribuição das Despesas</h3>
+                    </div>
+                </div>
+
+                <div class="chart-card__body">
+                    <div class="chart-canvas-wrap">
+                        <canvas id="graficoDespesas"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <div class="chart-card__body">
-                <div class="chart-canvas-wrap">
-                    <canvas id="graficoDespesas"></canvas>
+            <div class="chart-card" aria-labelledby="chart-title-comparativo">
+                <div class="chart-card__header">
+                    <div>
+                        <p class="eyebrow">Comparativo</p>
+                        <h3 id="chart-title-comparativo">Receitas x Gastos por Usuário</h3>
+                    </div>
+                </div>
+
+                <div class="chart-card__body">
+                    <div class="chart-canvas-wrap">
+                        <canvas id="graficoComparativoUsuarios"></canvas>
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,4 +1,5 @@
 let grafico = null;
+let graficoComparativo = null;
 let lancamentos = [];
 
 const STORAGE_KEY = "fincontrol.lancamentos";
@@ -184,6 +185,95 @@ function atualizarGrafico(resumo) {
     });
 }
 
+function calcularComparativoUsuarios(items) {
+    const porUsuario = {};
+
+    items.forEach((item) => {
+        const usuario = item.usuario || "Sem usuário";
+        const valor = Number(item.valor || 0);
+
+        if (!porUsuario[usuario]) {
+            porUsuario[usuario] = { receitas: 0, despesas: 0 };
+        }
+
+        if (item.tipo === "receita") {
+            porUsuario[usuario].receitas += valor;
+        } else {
+            porUsuario[usuario].despesas += valor;
+        }
+    });
+
+    return porUsuario;
+}
+
+function atualizarGraficoComparativo(porUsuario) {
+    const canvas = document.getElementById("graficoComparativoUsuarios");
+
+    if (!canvas || !window.Chart) return;
+
+    if (graficoComparativo) {
+        graficoComparativo.destroy();
+    }
+
+    const usuarios = Object.keys(porUsuario);
+
+    graficoComparativo = new Chart(canvas, {
+        type: "bar",
+        data: {
+            labels: usuarios,
+            datasets: [
+                {
+                    label: "Receitas",
+                    data: usuarios.map((usuario) => porUsuario[usuario].receitas),
+                    backgroundColor: "#22c55e",
+                    borderRadius: 6
+                },
+                {
+                    label: "Gastos",
+                    data: usuarios.map((usuario) => porUsuario[usuario].despesas),
+                    backgroundColor: "#ef4444",
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    ticks: { color: "#e2e8f0" },
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "#e2e8f0" },
+                    grid: { color: "rgba(148, 163, 184, 0.12)" }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        color: "#e2e8f0",
+                        padding: 16,
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        font: { size: 13 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => {
+                            const value = Number(context.raw || 0);
+                            return `${context.dataset.label}: R$ ${value.toLocaleString("pt-BR")}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 function carregarDadosDashboard() {
     const todosLancamentos = getLancamentosLocal();
     lancamentos = usuarioSelecionado
@@ -194,6 +284,7 @@ function carregarDadosDashboard() {
     atualizarCards(resumo);
     atualizarBarras(resumo);
     atualizarGrafico(resumo);
+    atualizarGraficoComparativo(calcularComparativoUsuarios(todosLancamentos));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
